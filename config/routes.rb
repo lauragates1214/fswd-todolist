@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  # set app root
+  root 'static_pages#index'
 
   # nesting all CRUD routes under namespace (adds /api in front of all routes)
   namespace :api do
