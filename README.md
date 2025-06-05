@@ -1,199 +1,47 @@
-# To Do List Full-stack
+# Full-Stack Task Management Application
 
-This is a To Do list full-stack application. It has a user table and a task table. And a front-end that consumes the API.
+Complete full-stack application with Rails API backend and JavaScript frontend, demonstrating API design and consumption.
 
-## API endpoints
+## Architecture
 
-Before you start, create a new user account by sending a post request to '/users'. It will return an object like this:
+- **Backend:** Ruby on Rails API with PostgreSQL database
+- **Frontend:** Vanilla JavaScript consuming REST API
+- **Database:** PostgreSQL with users and tasks tables
+- **API Design:** RESTful endpoints with proper HTTP methods
 
-```
-{ success: true, id: 1 }
-```
+## Features
 
-The id will be your api_key for making requests to the following tasks endpoints.
+- User account creation and API key authentication
+- Complete CRUD operations for task management
+- Task due dates and completion status tracking
+- API-first architecture with decoupled frontend
+- Comprehensive API documentation
 
-#### Tasks
+## API Endpoints
 
-<table>
-  <thead>
-    <tr>
-      <td>URI</td>
-      <td>Type</td>
-      <td>Description</td>
-      <td>Request Body</td>
-      <td>Sample Response</td>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>api/tasks?api_key=your_user_id</td>
-      <td>GET</td>
-      <td>Returns an object with a tasks property that contains an array of tasks belonging to you.</td>
-      <td>N/A</td>
-      <td>
-<pre>{
-  tasks: [
-    { id: 1,
-      content: 'A to do list task',
-      complete: 'false',
-      due: datetime,
-      updated_at: datetime,
-      created_at: datetime
-    },
-    { id: 2,
-      content: 'Another to do list task',
-      complete: 'true',
-      due: datetime,
-      updated_at: datetime,
-      created_at: datetime
-    },
-  ]
-}</pre>
-      </td>
-    </tr>
-    <tr>
-      <td>api/tasks?api_key=your_user_id</td>
-      <td>POST</td>
-      <td>Creates a new task under your user account.</td>
-      <td>
-<pre>{
-  task: {
-    content: 'This is a task',
-    due: 'Sat Oct 21 2017
-    14:05:00 GMT+0800 (HKT)'
-  }
-}
-</pre>
-      </td>
-      <td>
-<pre>{
-  task: {
-    id: 1,
-    content: 'This is a task',
-    complete: 'false',
-    due: '2017-10-21T06:01:02.000Z',
-    created_at: '2017-10-21T06:00:07.065Z'
-  }
-}</pre>
-      </td>
-    </tr>
-    <tr>
-    <td>api/tasks/:id?api_key=your_user_id</td>
-    <td>PUT</td>
-    <td>Update the content or due time of the task specified by id.</td>
-    <td>
-<pre>{
-  task: {
-    content: 'This is not a task',
-    due: 'Sat Oct 21 2017
-    14:09:38 GMT+0800 (HKT)',
-  }
-}</pre>
-    </td>
-    <td>
-<pre>{
-  task: {
-    id: 1,
-    content: 'This is not a task',
-    complete: 'true',
-    due: '2017-10-21T06:09:38.000Z',
-    created_at: '2017-10-21T06:00:07.065Z',
-    updated_at: '2017-10-21T06:09:54.730Z'
-  }
-}</pre>
-      </td>
-    </tr>
-    <tr>
-      <td>api/tasks/:id/mark_complete?api_key=your_user_id</td>
-      <td>PUT</td>
-      <td>Mark the complete property to true for the task specified by id.</td>
-      <td>N/A
-      </td>
-      <td>
-<pre>{
-  task: {
-    id: 1,
-    content: 'This is a task',
-    complete: 'true',
-    due: datetime,
-    created_at: DateObject,
-    updated_at: DateObject
-  }
-}</pre>
-      </td>
-    </tr>
-    <tr>
-      <td>api/tasks/:id/mark_active?api_key=your_user_id</td>
-      <td>PUT</td>
-      <td>Mark the complete property to false for the task specified by id.</td>
-      <td>N/A
-      </td>
-      <td>
-<pre>{
-  task: {
-    id: 1,
-    content: 'This is a task',
-    complete: 'false',
-    due: datetime,
-    created_at: DateObject,
-    updated_at: DateObject
-  }
-}</pre>
-      </td>
-    </tr>
-    <tr>
-      <td>api/tasks/:id?api_key=your_user_id</td>
-      <td>DELETE</td>
-      <td>Delete the task specified by id.</td>
-      <td>N/A
-      </td>
-      <td>
-<pre>{
-  success: true
-}</pre>
-      </td>
-    </tr>
-  </tbody>
-</table>
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/users` | Create user account |
+| GET | `/api/tasks` | Retrieve user's tasks |
+| POST | `/api/tasks` | Create new task |
+| PUT | `/api/tasks/:id` | Update task |
+| PUT | `/api/tasks/:id/mark_complete` | Mark task complete |
+| DELETE | `/api/tasks/:id` | Delete task |
 
-### Datetime
-Datetime objects are stored in UTC time.
+## Key Concepts Demonstrated
 
-## Front-end App
+- RESTful API design and implementation
+- API authentication using user-generated keys
+- Database relationships and foreign key constraints
+- API documentation and endpoint design
+- Separation of API and presentation layers
+- UTC datetime handling for consistent time management
 
-The To Do List front-end is located at root `/`. It uses the user id 1 to make requests.
+## Technical Highlights
 
-## Running the server locally
+- Complete Rails API with proper HTTP status codes
+- JavaScript API consumption with async/await
+- Database migrations and seed data setup
+- API-first development approach
 
-After downloading the repository
-Install the gems
-
-```
-bundle
-```
-
-Create the database
-
-```
-rails db:create
-```
-
-Migrate the database
-
-```
-rails db:migrate
-```
-
-Seed the database
-
-```
-rails db:seed
-```
-
-Start server:
-
-```
-rails s
-```
-
-Visit localhost:3000 to see the To Do List.
+This project demonstrates full-stack development skills with emphasis on API design and client-server architecture.
